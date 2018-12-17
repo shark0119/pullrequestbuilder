@@ -2,7 +2,9 @@ package com.shark.report;
 
 import com.shark.entity.CodeCoverageDO;
 import com.shark.entity.CodeSmellDO;
+import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,32 +18,23 @@ public class MavenReportAnalyzer implements ReportAnalyzer {
     private static final String CODE_COVERAGE_REPORT = "";
     private static final String CODE_SMELL_REPORT = "";
 
+    @Getter
+    private List<CodeSmellDO> codeSmells;
+    @Getter
+    private CodeCoverageDO codeCoverage;
+    @Getter
+    private boolean pass;
+    @Getter
+    private String reportSummary;
+    @Getter
+    private String supportVersionInfo = "pmd & jacoco";
     private String codeCoverageReportPath = "target/sit/jacoco/jacoco.xml";
     private String codeSmellReportPath = "target/pmd.xml";
 
     public MavenReportAnalyzer(String projectBaseDir) {
+        codeSmells = new ArrayList<>();
         this.codeCoverageReportPath = projectBaseDir + CODE_COVERAGE_REPORT;
         this.codeSmellReportPath = projectBaseDir + CODE_SMELL_REPORT;
-    }
-
-    public String reportSummary() {
-        return null;
-    }
-
-    public boolean pass() {
-        return false;
-    }
-
-    public List<CodeSmellDO> getCodeSmells() {
-        return null;
-    }
-
-    public CodeCoverageDO getCodeCoverage() {
-        return null;
-    }
-
-    public String getSupportVersionInfo() {
-        return "jacoco & pmd";
     }
 
 }
